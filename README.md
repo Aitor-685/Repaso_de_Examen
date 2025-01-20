@@ -1,237 +1,235 @@
-¡Entendido! A continuación te muestro cómo podría quedar el archivo `README.md` con ejemplos de código para cada función:
+### 1. **Uso de funciones básicas y estructuras de control**
+   
+   **Concepto:** Las funciones básicas permiten estructurar tu programa en bloques más pequeños y manejables. `when` es una forma de realizar un "switch" o "case" en Kotlin. Es útil para manejar múltiples opciones.
+
+   **Ejemplo:**
+   ```kotlin
+   fun muestraMenu() {
+       println("1. Sumar")
+       println("2. Restar")
+       println("3. Multiplicar")
+       println("4. Dividir")
+   }
+
+   fun triaOpcioMenu(): Int {
+       println("Selecciona una opción:")
+       return readlnOrNull()?.toIntOrNull() ?: 0
+   }
+
+   fun main() {
+       while (true) {
+           muestraMenu()
+           when (triaOpcioMenu()) {
+               1 -> println("Has seleccionado la opción de sumar.")
+               2 -> println("Has seleccionado la opción de restar.")
+               3 -> println("Has seleccionado la opción de multiplicar.")
+               4 -> println("Has seleccionado la opción de dividir.")
+               else -> println("Opción no válida.")
+           }
+       }
+   }
+   ```
+   **Explicación:** Este código muestra un menú y espera la elección del usuario. Dependiendo de la opción seleccionada, ejecuta una acción específica usando `when`. Si se elige una opción no válida, se muestra un mensaje de error.
 
 ---
 
-# Proyecto del Castillo
+### 2. **Trabajar con listas mutables (`MutableList`)**
+   
+   **Concepto:** Una `MutableList` permite modificar la lista después de que se haya creado. Puedes agregar, eliminar o modificar elementos dentro de ella.
 
-Este proyecto simula un sistema de alojamiento de personajes en un castillo. El castillo tiene varias plantas, y los personajes pueden alojarse en habitaciones disponibles de acuerdo con ciertos criterios. El objetivo es gestionar las habitaciones, mostrar su estado y permitir que los personajes se alojen en el castillo.
+   **Ejemplo:**
+   ```kotlin
+   val personajes = mutableListOf("Mario", "Luigi", "Yoshi")
 
-## Descripción de las Funciones
+   // Agregar un nuevo personaje
+   personajes.add("Princess Peach")
 
-### 1. `main()`
+   // Eliminar un personaje
+   personajes.remove("Luigi")
 
-La función principal del programa. Es responsable de iniciar el programa y gestionar el ciclo de interacción con el usuario. Llama a otras funciones según la opción que elija el usuario desde el menú.
+   // Modificar un personaje
+   personajes[0] = "Toad"
 
-```kotlin
-fun main() {
-    while (true) {
-        mostraMenu()  // Muestra el menú de opciones
-        when (triaOpcioMenu()) {  // Captura la opción seleccionada por el usuario
-            1 -> alojarUnPersonaje()  // Aloja un personaje
-            2 -> visualizarEstadoHabitaciones()  // Muestra el estado de las habitaciones
-            3 -> mostrarPersonajesAlojados()  // Muestra los personajes alojados
-            4 -> {
-                println("Sortint de l'aplicació. Adéu!")  // Finaliza el programa
-                break
-            }
-            else -> println("Opció no vàlida, torna-ho a intentar.")  // En caso de opción inválida
-        }
-    }
-}
-```
+   // Mostrar los personajes actuales
+   println(personajes) // Output: [Toad, Yoshi, Princess Peach]
+   ```
 
-### 2. `mostraMenu()`
+   **Explicación:** Aquí se crea una `MutableList` de personajes. Agregamos un personaje con `add()`, eliminamos con `remove()` y modificamos un personaje usando el índice de la lista. Luego, imprimimos el contenido final de la lista.
 
-Esta función muestra el menú de opciones del castillo. Es utilizada dentro de la función `main()` para que el usuario elija qué acción realizar.
+---
 
-```kotlin
-fun mostraMenu() {
-    println("-----------------------------------------------------------")
-    println(" __  __            _         _                   ")
-    println(" |  \\/  | __ _ _ __(_) ___   | |__  _ __ ___  ___ ")
-    println(" | |\\/| |/ _` | '__| |/ _ \\  | '_ \\| '__/ _ \\/ __|")
-    println(" | |  | | (_| | |  | | (_) | | |_) | | | (_) \\__ \\")
-    println(" |_|  |_|\\__,_|_|  |_|\\___/  |_.__/|_|  \\___/|___/")
-    println("-----------------------------------------------------------")
-    println(BLUE_BOLD_BRIGHT + "Menú del Castillo:" + RESET)
-    println(YELLOW_BOLD_BRIGHT + "1. Quieres alojarte en el castillo" + RESET)
-    println(YELLOW_BOLD_BRIGHT + "2. Visualizar el estado de las habitaciones" + RESET)
-    println(YELLOW_BOLD_BRIGHT + "3. Quienes las ocupan" + RESET)
-    println(YELLOW_BOLD_BRIGHT + "4. Salir" + RESET)
-}
-```
+### 3. **Trabajar con mapas (`MutableMap`)**
+   
+   **Concepto:** Un `MutableMap` es una colección de pares clave-valor. Puedes añadir, eliminar y modificar valores asociados a una clave específica.
 
-### 3. `triaOpcioMenu()`
+   **Ejemplo:**
+   ```kotlin
+   val habitacionesOcupadas = mutableMapOf<String, String>()
+   
+   // Asignar habitaciones a personajes
+   habitacionesOcupadas["Mario"] = "Primera Planta"
+   habitacionesOcupadas["Luigi"] = "Segunda Planta"
 
-Esta función se encarga de capturar la opción que el usuario elige del menú.
+   // Acceder a las habitaciones ocupadas
+   println(habitacionesOcupadas["Mario"]) // Output: Primera Planta
 
-```kotlin
-fun triaOpcioMenu(): Int {
-    print(RED_BOLD_BRIGHT + "Tria una opció del menú: " + RESET)
-    return readlnOrNull()?.toIntOrNull() ?: 0  // Si la entrada no es válida, retorna 0
-}
-```
+   // Eliminar un personaje de las habitaciones
+   habitacionesOcupadas.remove("Luigi")
 
-### 4. `visualizarEstadoHabitaciones()`
+   // Mostrar el mapa actualizado
+   println(habitacionesOcupadas) // Output: {Mario=Primera Planta}
+   ```
 
-Esta función muestra el estado actual de las habitaciones del castillo. Para cada planta, muestra cuántas habitaciones están disponibles y cuántas están ocupadas.
+   **Explicación:** Usamos un `MutableMap` para asignar personajes a habitaciones. Se agregan y eliminan pares clave-valor, y se puede acceder a los valores con su clave.
 
-```kotlin
-fun visualizarEstadoHabitaciones() {
-    println("Estado actual del castillo:")
-    habitacionesDelCastillo.forEach { planta ->
-        val ocupadas = habitacionesOcupadas.values.count { it.pisos == planta.pisos }
-        val disponibles = planta.habitaciones - ocupadas
-        println("Planta: ${planta.pisos} | Estrellas: ${planta.estrellas} | Disponibles: $disponibles | Ocupadas: $ocupadas")
-    }
-}
-```
+---
 
-#### Ejemplo de salida:
-```
-Estado actual del castillo:
-Planta: Jardín | Estrellas: 1 | Disponibles: 1 | Ocupadas: 0
-Planta: Sótano | Estrellas: 2 | Disponibles: 4 | Ocupadas: 1
-Planta: Primera planta | Estrellas: 4 | Disponibles: 4 | Ocupadas: 3
-...
-```
+### 4. **Uso de `data class`**
+   
+   **Concepto:** Un `data class` es una clase diseñada para almacenar datos, donde Kotlin genera automáticamente funciones como `toString()`, `equals()`, y `hashCode()` para que no tengas que escribirlas manualmente.
 
-### 5. `mostrarPersonajesAlojados()`
+   **Ejemplo:**
+   ```kotlin
+   data class Castillo(val nombre: String, val estrellas: Int)
 
-Esta función muestra qué personajes están actualmente alojados en el castillo y en qué planta se encuentran.
+   val castillo1 = Castillo("Castillo Azul", 5)
+   val castillo2 = Castillo("Castillo Rojo", 3)
 
-```kotlin
-fun mostrarPersonajesAlojados() {
-    if (habitacionesOcupadas.isEmpty()) {
-        println("No hay personajes alojados en el castillo.")
-    } else {
-        println("Personajes alojados:")
-        habitacionesOcupadas.forEach { (personaje, habitacion) ->
-            println("  - $personaje en ${habitacion.pisos} (${habitacion.estrellas}★)")
-        }
-    }
-}
-```
+   // Mostrar el contenido del data class
+   println(castillo1) // Output: Castillo(nombre=Castillo Azul, estrellas=5)
+   ```
 
-#### Ejemplo de salida:
-```
-Personajes alojados:
-  - Mario en Primera planta (4★)
-  - Wario en Tercera planta (5★)
-```
+   **Explicación:** Usamos `data class` para representar un castillo con nombre y estrellas. Las instancias de esta clase se muestran de manera clara usando `println()` gracias al método `toString()` generado automáticamente.
 
-### 6. `alojarUnPersonaje()`
+---
 
-Esta función permite alojar a un personaje en una de las habitaciones disponibles del castillo.
+### 5. **Condiciones y Bucles**
+   
+   **Concepto:** Los bucles y las condiciones permiten iterar sobre colecciones y tomar decisiones basadas en ciertas condiciones.
 
-```kotlin
-fun alojarUnPersonaje() {
-    if (personajes.isEmpty()) {
-        println("No quedan personajes pendientes de alojamiento.")
-        return
-    }
+   **Ejemplo:**
+   ```kotlin
+   val habitacionesDelCastillo = listOf("Jardín", "Sótano", "Primera Planta", "Segunda Planta")
+   val habitacionesOcupadas = mutableListOf("Sótano", "Primera Planta")
 
-    println("Personajes pendientes: ${personajes.joinToString(", ")}")
-    println("Introduce el nombre del personaje que quieres alojar:")
-    val nombre = readlnOrNull()?.trim()
+   for (habitacion in habitacionesDelCastillo) {
+       if (habitacion in habitacionesOcupadas) {
+           println("$habitacion está ocupada.")
+       } else {
+           println("$habitacion está disponible.")
+       }
+   }
+   ```
 
-    if (nombre == null || !personajes.contains(nombre)) {
-        println("Personaje no válido o no está pendiente de alojamiento.")
-        return
-    }
+   **Explicación:** Usamos un bucle `for` para recorrer las habitaciones. Dentro del bucle, se verifica si la habitación está ocupada mediante `if` y el operador `in`. Esto es útil para mostrar el estado de cada habitación.
 
-    val random = kotlin.random.Random
-    var contadorEstelar: Int = 0
-    for (x in 1..5) {
-        val num0 = (1..2).random()
-        val num1 = (0..500).random()
-        val num2 = (0..500).random()
-        if (num0 == 1) {
-            var resultSum = readInt("dime cuanto es $num1 + $num2", "Solo Introduce números enteros.")
-            if (num1 + num2 == resultSum) {
-                contadorEstelar++
-                println("Correcta")
-            } else
-                println("Incorrecta, el número correcto era: ${num1 + num2}")
-        } else {
-            var resultRest = readInt("dime cuanto es $num1 - $num2", "Solo Introduce números enteros.")
-            if (num1 - num2 == resultRest) {
-                contadorEstelar++
-                println("Correcta")
-            } else
-                println("Incorrecta, el número correcto era: ${num1 - num2}")
-        }
-    }
+---
 
-    val habitacionDisponible = habitacionesDelCastillo
-        .filter { planta -> planta.habitaciones > habitacionesOcupadas.values.count { it.pisos == planta.pisos }
-                && planta.estrellas <= contadorEstelar}
-        .maxByOrNull { it.estrellas }
+### 6. **Recursividad**
 
-    if (habitacionDisponible != null) {
-        habitacionesOcupadas[nombre] = habitacionDisponible
-        personajes.remove(nombre)
-        println("$nombre ha sido alojado en la planta ${habitacionDisponible.pisos} (${habitacionDisponible.estrellas}★).")
-    } else {
-        println("No quedan habitaciones disponibles. $nombre puede acampar en el jardín.")
-        personajes.remove(nombre)
-    }
-}
-```
+   **Concepto:** La recursividad es cuando una función se llama a sí misma. Es útil en problemas que pueden dividirse en subproblemas similares.
 
-#### Ejemplo de salida:
-```
-Personajes pendientes: Mario, Luigi, Peach
-Introduce el nombre del personaje que quieres alojar:
-Mario
-dime cuanto es 231 + 345: 576
-Correcta
-dime cuanto es 121 - 45: 76
-Correcta
-Mario ha sido alojado en la planta Primera planta (4★).
-```
+   **Ejemplo:**
+   ```kotlin
+   fun factorial(n: Int): Int {
+       return if (n == 0) 1 else n * factorial(n - 1)
+   }
 
-### 7. `readInt(prompt: String, errorMessage: String): Int`
+   println(factorial(5)) // Output: 120
+   ```
 
-Esta función personalizada se utiliza para leer un número entero de la entrada del usuario, mostrando un mensaje de solicitud (prompt) y validando que la entrada sea un número.
+   **Explicación:** La función `factorial` se llama a sí misma hasta llegar al caso base `n == 0`. Esto es un ejemplo clásico de recursividad, donde el problema original se reduce a subproblemas más simples.
 
-```kotlin
-fun readInt(prompt: String, errorMessage: String): Int {
-    var result: Int?
-    do {
-        println(prompt)
-        val input = readlnOrNull()
-        result = input?.toIntOrNull()
-        if (result == null) {
-            println(errorMessage)
-        }
-    } while (result == null)
-    return result
-}
-```
+---
 
-#### Ejemplo de salida:
-```
-dime cuanto es 231 + 345: abc
-Solo Introduce números enteros.
-dime cuanto es 231 + 345: 576
-Correcta
-```
+### 7. **Funciones con parámetros y retorno**
+   
+   **Concepto:** Las funciones pueden aceptar parámetros y devolver un valor. Esto permite modularizar tu código.
 
-## Estructura de Datos
+   **Ejemplo:**
+   ```kotlin
+   fun suma(a: Int, b: Int): Int {
+       return a + b
+   }
 
-### `Castillo`
+   println(suma(5, 7)) // Output: 12
+   ```
 
-La clase `Castillo` representa una planta o área del castillo. Cada planta tiene:
+   **Explicación:** La función `suma` recibe dos parámetros `a` y `b`, y devuelve su suma. Este tipo de función es muy útil para realizar cálculos dentro del programa.
 
-- `pisos`: El nombre o descripción de la planta (por ejemplo, "Jardín", "Primera planta").
-- `estrellas`: El número de estrellas de la planta, que indica la calidad de las habitaciones.
-- `habitaciones`: El número total de habitaciones en la planta.
+---
 
-```kotlin
-data class Castillo(
-    val pisos: String,
-    val estrellas: Int,
-    val habitaciones: Int
-)
-```
+### 8. **Uso de randomización**
+   
+   **Concepto:** Puedes usar la clase `Random` para generar números aleatorios, lo que es útil para simulaciones, juegos, y más.
 
-### `habitacionesDelCastillo`
+   **Ejemplo:**
+   ```kotlin
+   val random = kotlin.random.Random
+   val numeroAleatorio = random.nextInt(1, 10)
+   println("Número aleatorio entre 1 y 10: $numeroAleatorio")
+   ```
 
-Una lista mutable (`mutableListOf`) que contiene los datos de las habitaciones del castillo, representadas por instancias de la clase `Cast
+   **Explicación:** En este ejemplo, se genera un número aleatorio entre 1 y 10 utilizando `Random.nextInt()`. Esto es común en programas de juegos o simulaciones donde necesitas variabilidad.
 
-illo`.
+---
 
-### `habitacionesOcupadas`
+### 9. **Entrada y Validación de Datos**
 
-Un mapa mutable (`mutableMapOf`) que mantiene un registro de las habitaciones ocupadas y por qué personajes.
+   **Concepto:** La validación de datos es crucial para evitar errores o entradas incorrectas del usuario. Puedes usar `readlnOrNull()` y verificar si el dato es válido.
+
+   **Ejemplo:**
+   ```kotlin
+   fun leerNumero(): Int {
+       println("Introduce un número:")
+       return readlnOrNull()?.toIntOrNull() ?: 0
+   }
+
+   println("Número ingresado: ${leerNumero()}")
+   ```
+
+   **Explicación:** La función `leerNumero` pide al usuario que ingrese un número. Si la entrada no es válida, se devuelve `0` por defecto.
+
+---
+
+### 10. **Manejo de excepciones y validación de datos**
+
+   **Concepto:** El manejo de excepciones te permite capturar errores y continuar ejecutando el programa sin que se detenga abruptamente.
+
+   **Ejemplo:**
+   ```kotlin
+   fun dividir(a: Int, b: Int): Int {
+       return try {
+           a / b
+       } catch (e: ArithmeticException) {
+           println("No se puede dividir entre cero.")
+           0
+       }
+   }
+
+   println(dividir(10, 0)) // Output: No se puede dividir entre cero. 0
+   ```
+
+   **Explicación:** En este ejemplo, se maneja una excepción `ArithmeticException` que ocurre cuando intentas dividir entre cero. En lugar de que el programa se detenga, se maneja el error y se devuelve `0`.
+
+---
+
+### 11. **Algoritmos de Búsqueda y Filtrado**
+
+   **Concepto:** El filtrado y la búsqueda de elementos en colecciones son tareas comunes. Puedes usar métodos como `filter` y `maxByOrNull`.
+
+   **Ejemplo:**
+   ```kotlin
+   val habitacionesDelCastillo = listOf(
+       Castillo("Jardín", 1),
+       Castillo("Primera Planta", 5),
+       Castillo("
+
+Sótano", 3)
+   )
+
+   val habitacionesDisponibles = habitacionesDelCastillo.filter { it.estrellas >= 3 }
+   println(habitacionesDisponibles) // Output: [Castillo(nombre=Primera Planta, estrellas=5), Castillo(nombre=Sótano, estrellas=3)]
+   ```
+
+   **Explicación:** Se utiliza `filter` para filtrar las habitaciones con 3 estrellas o más. El resultado es una lista de castillos que cumplen con la condición.
