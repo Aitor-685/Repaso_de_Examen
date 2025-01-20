@@ -71,3 +71,4 @@ fun calcularPreuFinal(importCompra: Double, esVIP: Boolean, esBlackFriday: Boole
         esVIP || importCompra > 200 -> importCompra * 0.8 // 20% de descuento si es VIP o la compra > 200€.
         else -> importCompra // Sin descuento.
     }
+
