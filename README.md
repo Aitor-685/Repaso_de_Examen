@@ -1,5 +1,5 @@
  * Calcula el precio final de una compra según las condiciones del cliente.
- *
+ 
  * @param importCompra El importe inicial de la compra.
  * @param esVIP Indica si el cliente es VIP.
  * @param esBlackFriday Indica si es la semana de Black Friday.
@@ -10,7 +10,7 @@
  *
 fun calcularPreuFinal(importCompra: Double, esVIP: Boolean, esBlackFriday: Boolean): Double =
     when {
-        esBlackFriday -> importCompra * 0.5 // 50% de descuento si es Black Friday.
+       esBlackFriday -> importCompra * 0.5 // 50% de descuento si es Black Friday.
         esVIP || importCompra > 200 -> importCompra * 0.8 // 20% de descuento si es VIP o la compra > 200€.
         else -> importCompra // Sin descuento.
     }
