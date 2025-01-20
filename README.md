@@ -233,3 +233,109 @@ Sótano", 3)
    ```
 
    **Explicación:** Se utiliza `filter` para filtrar las habitaciones con 3 estrellas o más. El resultado es una lista de castillos que cumplen con la condición.
+
+### **Ejercicio 1: Completar una función para alojar un personaje en una habitación**
+Te proporcionan una función incompleta que debe alojar a un personaje en una habitación del castillo, pero la lógica de asignación de la habitación no está completa. Debes completarla.
+
+#### Código incompleto:
+```kotlin
+fun alojarUnPersonaje(personaje: String) {
+    // Debes alojar un personaje en una habitación disponible
+    val habitacionDisponible = habitaciones.filter { it.habitaciones > habitacionesOcupadas.count() }
+    // Lógica faltante: asignar la habitación al personaje
+}
+```
+
+#### Tarea:
+- Completa la función para que asigne correctamente a un personaje una habitación disponible. Si no hay habitaciones disponibles, debes indicar que el personaje debe acampar en el jardín.
+
+**Solución esperada:**
+```kotlin
+fun alojarUnPersonaje(personaje: String) {
+    val habitacionDisponible = habitacionesDelCastillo
+        .filter { it.habitaciones > habitacionesOcupadas.values.count { it.pisos == it.pisos } }
+        .maxByOrNull { it.estrellas }
+
+    if (habitacionDisponible != null) {
+        habitacionesOcupadas[personaje] = habitacionDisponible
+        println("$personaje ha sido alojado en ${habitacionDisponible.pisos} (${habitacionDisponible.estrellas}★).")
+    } else {
+        println("No hay habitaciones disponibles. $personaje puede acampar en el jardín.")
+    }
+}
+```
+
+---
+
+### **Ejercicio 2: Crear una función recursiva para calcular el factorial**
+Crea una función recursiva que calcule el factorial de un número. Recuerda que el factorial de un número \( n \) es \( n! = n \times (n - 1) \times ... \times 1 \), y se define recursivamente como:
+
+\[
+n! = n \times (n - 1)!
+\]
+
+#### Especificaciones:
+- La función debe ser recursiva.
+- Si el número es 0 o 1, el factorial es 1.
+
+**Solución esperada:**
+```kotlin
+fun factorialRecursivo(n: Int): Int {
+    return if (n <= 1) 1 else n * factorialRecursivo(n - 1)
+}
+```
+
+---
+
+### **Ejercicio 3: Función para calcular la suma de elementos en una lista de enteros**
+Te dan una lista de enteros, y debes crear una función que calcule la suma de todos los elementos. Usa una función estándar de Kotlin para realizar esta operación. 
+
+#### Especificaciones:
+- La función debe aceptar una lista de enteros.
+- Debe devolver la suma de los elementos de la lista.
+
+**Solución esperada:**
+```kotlin
+fun sumaElementos(lista: List<Int>): Int {
+    return lista.sum()
+}
+```
+
+---
+
+### **Ejercicio 4: Crear una función para ordenar las habitaciones de un castillo por estrellas**
+Crea una función que reciba la lista de habitaciones y devuelva las habitaciones ordenadas por el número de estrellas en orden descendente. Usa el concepto de `data class` que ya has usado en el código.
+
+#### Especificaciones:
+- La función debe recibir una lista de habitaciones (`List<Castillo>`).
+- Debe devolver la lista ordenada por el número de estrellas de mayor a menor.
+
+**Solución esperada:**
+```kotlin
+fun ordenarHabitacionesPorEstrellas(habitaciones: List<Castillo>): List<Castillo> {
+    return habitaciones.sortedByDescending { it.estrellas }
+}
+```
+
+---
+
+### **Ejercicio 5: Completar una función que verifique si un personaje ya está alojado en el castillo**
+Te proporcionan una función incompleta que verifica si un personaje ya está alojado en el castillo. Debes completar la lógica para buscar al personaje en el mapa de habitaciones ocupadas.
+
+#### Código incompleto:
+```kotlin
+fun estaAlojado(personaje: String): Boolean {
+    // Lógica faltante: verifique si el personaje está alojado en alguna habitación
+    return habitacionesOcupadas.containsKey(personaje) // Esto está incompleto
+}
+```
+
+#### Tarea:
+- Completa la función para que devuelva `true` si el personaje ya está alojado en una habitación, y `false` si no lo está.
+
+**Solución esperada:**
+```kotlin
+fun estaAlojado(personaje: String): Boolean {
+    return habitacionesOcupadas.containsKey(personaje)
+}
+```
