@@ -264,3 +264,143 @@ class EjemplosDePruebas {
         assertNotNull(cadenaLlena, "La cadena no debería ser nula")
     }
 }
+
+/**
+ * Aquest fitxer conté proves unitàries per a les següents funcions:
+ * ## Com executar:
+ * - Aquest fitxer està pensat per ser usat amb `kotlin.test` i una eina de testing com JUnit.
+ * - Desa el fitxer en el directori de tests del projecte (p. ex., `src/test/kotlin`).
+ * - Executa els tests amb la teva IDE o línia de comandes.
+ */
+
+class FuncionsTests {
+
+    // TESTS PER A FACTORIAL
+    @Test
+    fun testFactorial() {
+        // Casos base
+        assertEquals(1, factorial(0))
+        assertEquals(1, factorial(1))
+
+        // Casos regulars
+        assertEquals(120, factorial(5))
+        assertEquals(3628800, factorial(10))
+
+        // Casos límit
+        assertTrue(factorial(12) > 0)
+
+        // Casos invàlids
+        val exception = assertFailsWith<IllegalArgumentException> {
+            factorial(-1)
+        }
+        assertTrue(exception.message!!.contains("ha de ser natural"))
+    }
+
+    // TESTS PER A DOBLE FACTORIAL
+    @Test
+    fun testDobleFactorial() {
+        // Números parells
+        assertEquals(2, dobleFactorial(2))
+        assertEquals(8, dobleFactorial(4))
+        assertEquals(384, dobleFactorial(8))
+
+        // Números imparells
+        assertEquals(1, dobleFactorial(1))
+        assertEquals(15, dobleFactorial(5))
+        assertEquals(945, dobleFactorial(9))
+
+        // Zero
+        assertEquals(1, dobleFactorial(0))
+
+        // Casos invàlids
+        val exception = assertFailsWith<IllegalArgumentException> {
+            dobleFactorial(-2)
+        }
+        assertTrue(exception.message!!.contains("ha de ser natural"))
+    }
+
+    // TESTS PER A COMPTAR XIFRES
+    @Test
+    fun testComptarXifres() {
+        // Números positius
+        assertEquals(1, comptarXifres(5))
+        assertEquals(2, comptarXifres(42))
+        assertEquals(5, comptarXifres(12345))
+
+        // Números negatius
+        assertEquals(1, comptarXifres(-5))
+        assertEquals(2, comptarXifres(-42))
+        assertEquals(5, comptarXifres(-12345))
+
+        // Zero
+        assertEquals(1, comptarXifres(0))
+    }
+
+    // TESTS PER A INVERTIR NUMERO
+    @Test
+    fun testInvertirNumero() {
+        // Números positius
+        assertEquals(5, invertirNumero(5))
+        assertEquals(24, invertirNumero(42))
+        assertEquals(54321, invertirNumero(12345))
+
+        // Números negatius
+        assertEquals(-5, invertirNumero(-5))
+        assertEquals(-24, invertirNumero(-42))
+        assertEquals(-54321, invertirNumero(-12345))
+
+        // Zero
+        assertEquals(0, invertirNumero(0))
+    }
+
+    // TESTS PER A FIBONACCI
+    @Test
+    fun testFibonacci() {
+        // Casos base
+        assertEquals(0, fibonacci(0))
+        assertEquals(1, fibonacci(1))
+
+        // Casos regulars
+        assertEquals(5, fibonacci(5))
+        assertEquals(21, fibonacci(8))
+
+        // Casos límit
+        assertTrue(fibonacci(15) > 0)
+
+        // Casos invàlids
+        val exception = assertFailsWith<IllegalArgumentException> {
+            fibonacci(-1)
+        }
+        assertTrue(exception.message!!.contains("ha de ser natural"))
+    }
+
+    // TESTS PER A ES CREIXENT
+    @Test
+    fun testEsCreixent() {
+        // Números creixents
+        assertTrue(esCreixent(123))
+        assertTrue(esCreixent(112233))
+        assertTrue(esCreixent(5))
+
+        // Números no creixents
+        assertFalse(esCreixent(321))
+        assertFalse(esCreixent(54321))
+        assertFalse(esCreixent(4311))
+    }
+
+    // TESTS PER A REDUCCIO DE DIGITS
+    @Test
+    fun testReduccioDigits() {
+        // Un sol dígit
+        assertEquals(7, reduccioDigits(7))
+        assertEquals(0, reduccioDigits(0))
+
+        // Múltiples dígits
+        assertEquals(6, reduccioDigits(123)) // 1+2+3 = 6
+        assertEquals(9, reduccioDigits(999)) // 9+9+9 = 27 -> 2+7 = 9
+        assertEquals(2, reduccioDigits(38))  // 3+8 = 11 -> 1+1 = 2
+
+        // Nombre gran
+        assertEquals(1, reduccioDigits(987654321)) // Redueix fins a 1
+    }
+}
