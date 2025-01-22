@@ -389,3 +389,88 @@ class FuncionsTests {
         assertEquals(1, reduccioDigits(987654321)) // Redueix fins a 1
     }
 }
+
+/**
+ * Pruebas unitarias para la clase ColorBombeta y Lampada.
+ */
+class LampadaTests {
+
+    /**
+     * Verifica que el método nextColor del enum ColorBombeta devuelve el siguiente color correcto.
+     */
+    @Test
+    fun testNextColor() {
+        assertEquals(ColorBombeta.YELLOW, ColorBombeta.nextColor(ColorBombeta.WHITE))
+        assertEquals(ColorBombeta.PURPLE, ColorBombeta.nextColor(ColorBombeta.YELLOW))
+        assertEquals(ColorBombeta.CYAN, ColorBombeta.nextColor(ColorBombeta.PURPLE))
+        assertEquals(ColorBombeta.WHITE, ColorBombeta.nextColor(ColorBombeta.CYAN)) // Ciclado al inicio
+    }
+
+    /**
+     * Verifica que la lámpara se enciende correctamente y la intensidad se reinicia a 1.
+     */
+    @Test
+    fun testEncendre() {
+        val lampada = Lampada()
+        lampada.encendre()
+        assertEquals("encesa - white - intensitat 1", lampada.toString().replace(Regex("\\x1b\\[[\\d;]*m"), "")) // Ignorar ANSI
+    }
+
+    /**
+     * Verifica que la lámpara se apaga correctamente.
+     */
+    @Test
+    fun testApagar() {
+        val lampada = Lampada()
+        lampada.encendre()
+        lampada.apagar()
+        assertEquals("apagada", lampada.toString())
+    }
+
+    /**
+     * Verifica que cambiar el color solo funciona si la lámpara está encendida.
+     */
+    @Test
+    fun testCanviarColor() {
+        val lampada = Lampada()
+        lampada.canviarColor() // Lámpara apagada, sin efecto
+        assertEquals("apagada", lampada.toString())
+
+        lampada.encendre()
+        lampada.canviarColor()
+        assertEquals("encesa - yellow - intensitat 1", lampada.toString().replace(Regex("\\x1b\\[[\\d;]*m"), ""))
+    }
+
+    /**
+     * Verifica que la intensidad aumenta correctamente y no supera el límite de 5.
+     */
+    @Test
+    fun testPujarIntensitat() {
+        val lampada = Lampada()
+        lampada.pujarIntensitat() // Lámpara apagada, sin efecto
+        assertEquals("apagada", lampada.toString())
+
+        lampada.encendre()
+        lampada.pujarIntensitat()
+        assertEquals("encesa - white - intensitat 2", lampada.toString().replace(Regex("\\x1b\\[[\\d;]*m"), ""))
+
+        repeat(4) { lampada.pujarIntensitat() } // Llega al límite de 5
+        assertEquals("encesa - white - intensitat 5", lampada.toString().replace(Regex("\\x1b\\[[\\d;]*m"), ""))
+    }
+
+    /**
+     * Verifica que la representación en cadena refleja el estado actual de la lámpara.
+     */
+    @Test
+    fun testToString() {
+        val lampada = Lampada()
+        assertEquals("apagada", lampada.toString()) // Inicialmente apagada
+
+        lampada.encendre()
+        assertEquals("encesa - white - intensitat 1", lampada.toString().replace(Regex("\\x1b\\[[\\d;]*m"), ""))
+
+        lampada.apagar()
+        assertEquals("apagada", lampada.toString())
+    }
+}
+
